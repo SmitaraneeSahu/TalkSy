@@ -1,0 +1,26 @@
+
+.profile-postcard {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  text-decoration: none;
+  width: 300px;
+}
+/* .profile-postcard .cover {
+  height: 80px;
+  background: linear-gradient(140deg, #5433ff, #20bdff, #a5fecb);
+} */
+.profile-postcard .content {
+  display: flex; gap: 12px; align-items: center; padding: 12px;
+}
+.profile-postcard .avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  object-fit: cover; border: 2px solid #fff3;
+}
+.profile-postcard .name { margin: 0; font-size: 1.05rem; }
+.profile-postcard .title, .profile-postcard .location, .profile-postcard .bio {
+  margin: 2px 0; color: #ddd; font-size: 0.9rem;
+}

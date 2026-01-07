@@ -1,0 +1,24 @@
+.write-post{
+    position: fixed;
+    bottom: 50px;
+    right: 120px;
+    z-index: 1000;
+    width: 150px;
+    height: 50px;
+    color: var(--write-post-text);
+    background-color: var(--write-post-bg);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.write-post:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    background-color: var(--write-post-bg-hover);
+    color: var(--write-post-text-hover);
+}

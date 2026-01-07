@@ -1,0 +1,384 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+@import "tailwindcss";
+
+/* -------------------- Variables -------------------- */
+:root {
+  --bg: #ffffff;
+  --text: #0f172a; /* slate-900 */
+  --border: #e2e8f0; /* slate-200 */
+
+  /* Background image control */
+  --bg-image: none;                /* url("...") or none */
+  --bg-size: cover;                /* cover | contain | auto */
+  --bg-position: center;           /* left, center, right, etc. */
+  --bg-repeat: no-repeat;
+  --bg-overlay: rgba(0,0,0,0.00);  /* overlay for readability */
+
+  /* Only needed when the image is rendered on elements; we won't use it */
+  --bg-blend: normal;
+
+  /* Typography */
+  --font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-size: 16px;
+  --line-height: 1.5;
+
+  /* postcard */
+  --card-bg: #ffffff;          /* white */
+  --card-bg-hover: #f7f9f9;    /* your hover */
+  --card-border: #e5e7eb;      /* border */
+  --card-text-strong: #0f1419; /* name */
+  --card-text-muted: #536471;  /* username, time, dot */
+  --card-text: #0f1419;
+
+  --write-post-bg: #f1f1f1de;
+  --write-post-text: black;
+  --write-post-bg-hover: #bebebece;
+  --write-post-text-hover: white;
+
+  --logo-bar: black;
+  --menu-option: gray;
+  --menu-option-active: rgb(45,45,45);
+  --btn-bg: #282828ce;
+  --btn-text: white;
+}
+
+/* -------------------- Resets -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+
+  color: var(--text);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+
+  /* Transitions (safe) */
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    background-image 200ms ease,
+    font 150ms ease;
+}
+
+html, body, #root {
+  min-height: 100vh;
+}
+
+/* Solid page color only; NO image here anymore */
+body {
+  background-color: var(--bg);
+}
+
+/* -------------------- SINGLE fullscreen background image -------------------- */
+/* This prevents any child element from ever drawing the page image */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;               /* top:0; right:0; bottom:0; left:0 */
+  z-index: -1;            /* behind everything */
+  pointer-events: none;
+
+  /* Stack overlay and image */
+  background-image:
+    linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+    var(--bg-image);
+  background-size: var(--bg-size), var(--bg-size);
+  background-position: var(--bg-position), var(--bg-position);
+  background-repeat: var(--bg-repeat), var(--bg-repeat);
+
+  /* Optional: nice effect on scroll */
+  background-attachment: fixed;
+}
+
+/* -------------------- Layout -------------------- */
+main {
+  min-height: 90vh;
+  padding: 10px;
+}
+
+a {
+  color: #000000;
+}
+
+/* -------------------- Themes -------------------- */
+html.theme-light {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --border: #e2e8f0;
+}
+
+html.theme-dark {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+  --border: #1f2937;
+  
+  --card-bg: #0f172a;          /* slate-900-ish */
+  --card-bg-hover: #111827;    /* slightly lighter/darker as you prefer */
+  --card-border: #1f2937;      /* slate-800 */
+  --card-text-strong: #e5e7eb;
+  --card-text-muted: #9ca3af;  /* gray-400 */
+  --card-text: #e5e7eb;
+
+  --write-post-bg: #16223e;
+  --write-post-text: #e5e7eb;
+  --write-post-bg-hover: #1c2841;
+  --write-post-hover-text: white;
+
+  --logo-bar: white;
+  --menu-option: white;
+  --menu-option-active: gray;
+  --btn-bg: #1c2841 ;
+  --btn-text: white;
+}
+
+html.theme-sepia {
+  --bg: #f9f5ec;
+  --text: #3f2f1c;
+  --border: #e6d9c3;
+  --card-bg: #fffaf0;
+  --card-bg-hover: #f3e9d7;
+  --card-border: #e6d9c3;
+  --card-text-strong: #3f2f1c;
+  --card-text-muted: #6b5330;
+  --card-text: #3f2f1c;
+  --write-post-bg: #fffaf0;
+  --write-post-text: #3f2f1c;
+  --write-post-bg-hover: #f3e9d7;
+  --write-post-hover-text: white;
+  --logo-bar: #3f2f1c;
+  --btn-bg: #3f2f1c;
+  --btn-text: white;
+}
+
+/* -------------------- Background presets -------------------- */
+
+/* Solid (no image) */
+html[data-bg="none"] {
+  --bg-image: none;
+  --bg-overlay: rgba(0,0,0,0.00);
+  /* --bg-blend not used with ::before */
+}
+
+/* Subtle grid pattern via CSS gradients (on ::before) */
+html[data-bg="grid"] {
+  --bg-image:
+    linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  --bg-size: 24px 24px, 24px 24px;
+  --bg-position: 0 0, 0 0;
+  --bg-repeat: repeat, repeat;
+  --bg-overlay: rgba(0,0,0,0.00);
+}
+
+/* Dots pattern */
+html[data-bg="dots"] {
+  --bg-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.10) 1px, transparent 1px);
+  --bg-size: 16px 16px;
+  --bg-position: 0 0;
+  --bg-repeat: repeat;
+  --bg-overlay: rgba(0,0,0,0.00);
+}
+
+/* Photo 1 */
+html[data-bg="image1"] {
+  --text: #e5e7eb;
+  --border: #e5e7eb;
+  --bg-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop");
+  --bg-size: cover;
+  --bg-position: center;
+  --bg-repeat: no-repeat;
+  --bg-overlay: rgba(0, 0, 0, 0.70); /* contrast */
+  --card-bg: rgb(29, 62, 53);          /* slate-900-ish */
+  --card-bg-hover: rgb(25, 56, 47);    /* slightly lighter/darker as you prefer */
+  --card-border: #1f3731;      /* slate-800 */
+  --card-text-strong: #e5e7eb;
+  --card-text-muted: #9ca3af;  /* gray-400 */
+  --card-text: #e5ebe9;
+  --write-post-bg: rgb(29, 62, 53);
+  --write-post-text: #e5ebe9;
+  --write-post-bg-hover: rgb(25, 56, 47);
+  --write-post-hover-text: white;
+  --logo-bar: white;
+  --menu-option: white;
+  --menu-option-active: gray;
+  --btn-bg: rgb(29, 62, 53) ;
+  --btn-text: white;
+}
+
+/* Photo 2 */
+html[data-bg="image2"] {
+  --text: #e5e7eb;
+  --border: #e5e7eb;
+  --bg-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop");
+  --bg-size: cover;
+  --bg-position: center;
+  --bg-repeat: no-repeat;
+  --bg-overlay: rgba(0,0,0,0.70);
+  --card-bg: rgba(59, 35, 29);
+  --card-bg-hover: rgb(45, 27, 22);
+  --card-border: #e6d9c3;
+  --card-text-strong: #f6e5d0;
+  --card-text-muted: #6b5330;
+  --card-text: #3f2f1c;
+  --write-post-bg: rgba(59, 35, 29);
+  --write-post-text: #3f2f1c;
+  --write-post-bg-hover: rgb(45, 27, 22);
+  --write-post-hover-text: white;
+  --logo-bar: white;
+  --menu-option: white;
+  --menu-option-active: gray;
+  --btn-bg: rgba(59, 35, 29);
+  --btn-text: white;
+}
+
+/* -------------------- Fonts -------------------- */
+html[data-font="system"] {
+  --font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+html[data-font="serif"] {
+  --font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+html[data-font="mono"] {
+  --font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+html[data-font="display"] {
+  --font-family: "Trebuchet MS", "Segoe UI", Verdana, Tahoma, Geneva, sans-serif;
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --text: #0f172a;  
+  --border: #e2e8f0; 
+  --bg-image: none;                      
+  --bg-size: cover;                       
+  --bg-position: center;                  
+  --bg-repeat: no-repeat;
+  --bg-overlay: rgba(0,0,0,0.00);         
+  --bg-blend: normal; 
+
+  --font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-size: 16px;                 
+  --line-height: 1.5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    color: var(--text);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    transition: background-color 200ms ease, color 200ms ease, background-image 200ms ease, background-color 200ms ease,font 150ms ease;
+}
+html,
+body,
+#root{
+    min-height: 100vh;
+    background-color: var(--bg);
+}
+body{
+    background-image:
+    linear-gradient(var(--bg-overlay), var(--bg-overlay)),var(--bg-image);
+    background-size: var(--bg-size);
+    background-position: var(--bg-position);
+    background-repeat: var(--bg-repeat);
+    background-blend-mode: var(--bg-blend);
+}
+main {
+    min-height: 90vh;
+    padding: 10px;
+}
+
+a {
+    color: #000000;
+}
+
+html.theme-light {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --border: #e2e8f0;
+}
+
+html.theme-dark {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+  --border: #1f2937;
+}
+
+html.theme-sepia {
+  --bg: #f9f5ec;
+  --text: #3f2f1c;
+  --border: #e6d9c3;
+}
+
+html[data-bg="none"] {
+  --bg-image: none;
+  --bg-overlay: rgba(0,0,0,0.00);
+  --bg-blend: normal;
+}
+
+html[data-bg="grid"] {
+  --bg-image:
+    linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  --bg-size: 24px 24px, 24px 24px;
+  --bg-position: 0 0, 0 0;
+  --bg-repeat: repeat, repeat;
+  --bg-overlay: rgba(0,0,0,0.00);
+  --bg-blend: normal;
+}
+
+html[data-bg="dots"] {
+  --bg-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.10) 1px, transparent 1px);
+  --bg-size: 16px 16px;
+  --bg-position: 0 0;
+  --bg-repeat: repeat;
+  --bg-overlay: rgba(0,0,0,0.00);
+  --bg-blend: normal;
+}
+
+html[data-bg="image1"] {
+  --bg-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop");
+  --bg-size: cover;
+  --bg-position: center;
+  --bg-repeat: no-repeat;
+  --bg-overlay: rgba(0,0,0,0.18);   
+}
+
+html[data-bg="image2"] {
+  --bg-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop");
+  --bg-size: cover;
+  --bg-position: center;
+  --bg-repeat: no-repeat;
+  --bg-overlay: rgba(0,0,0,0.20);
+  --bg-blend: multiply;
+}
+
+html[data-font="system"] {
+  --font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html[data-font="serif"] {
+  --font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+html[data-font="mono"] {
+  --font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+html[data-font="display"] {
+  --font-family: "Trebuchet MS", "Segoe UI", Verdana, Tahoma, Geneva, sans-serif;
+} */

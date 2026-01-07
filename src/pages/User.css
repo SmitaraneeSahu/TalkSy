@@ -1,0 +1,440 @@
+.userContainer{
+    max-width: 1000px;
+    display: flex;
+}
+.userContent{
+    border-right: 2px solid rgb(172, 172, 172);
+    flex: 1;
+    min-height: 90vh;
+}
+.userMenu{
+    margin: 10px 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.userMenuOption{
+    cursor: pointer;
+    margin: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--menu-option);
+}
+.userMenuOption.active{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--menu-option-active);
+}
+
+/* --- Container for page layout in the demo (not required) --- */
+.demo-wrap {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  max-width: 920px;
+  margin: 24px auto;
+  padding: 0 12px;
+}
+
+.span-text{
+  font-size: 16px;
+  font-weight: 500;
+}
+.theme-box{
+  --bg: var(--card-bg);
+  --text: var(--card-text-strong);
+  --muted: var(--card-text);
+  --surface: #f3f4f6;
+  --border: var(--card-border);
+  --brand: #2563eb;
+  --brand-contrast: #ffffff;
+  --shadow: 0 8px 20px rgba(0,0,0,0.08);
+  --overlay: rgba(0,0,0,0.10); 
+  position: relative;
+  border-radius: 16px;
+  padding: 10px;
+  margin: 10px 10px 10px 0px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  min-height: 50px;
+  overflow: hidden;
+}
+
+/* Collapsible header */
+.theme-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 12px 8px;
+  font-size: 16px;
+  color: #111827;
+}
+.bg-toggle{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card-bg) ;
+  color: var(--card-text);
+  cursor: pointer;
+  padding: 12px 8px;
+  font-size: 16px;
+}
+.font-toggle{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card-bg) ;
+  cursor: pointer;
+  padding: 12px 8px;
+  font-size: 16px;
+}
+
+.chevron {
+  transition: transform 160ms ease;
+}
+.theme-toggle.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Options row */
+.theme-options {
+  display: flex;
+  gap: 14px;
+  padding: 10px 8px 14px 8px;
+}
+
+/* Base circle */
+.theme-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent; /* will become same color on select */
+  outline: none;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* Selected: slightly bigger with border of same color */
+.theme-circle.selected {
+  transform: scale(1.2);
+  border-color: currentColor; /* takes the color set per theme below */
+}
+
+/* Theme-specific colors:
+   Set 'color' to desired border color so currentColor works */
+.theme-circle.light {
+  background: #ffffff;
+  color: #d1d5db;          /* border color for light */
+  box-shadow: inset 0 0 0 1px #e5e7eb; /* subtle edge so white is visible */
+}
+
+.theme-circle.dark {
+  background: #0b1220;
+  color: #0b1220;
+  box-shadow: inset 0 0 0 1px #041943;          /* border same as dark circle */
+}
+
+.theme-circle.sepia {
+  background: #f4ecd8;     /* sepia fill */
+  color: #c0975b;          /* border same sepia tone */
+  box-shadow: inset 0 0 0 1px #c0975b;
+}
+
+/* Keyboard focus for accessibility */
+.theme-circle:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35); /* blue focus ring */
+  outline: none;
+}
+
+
+/* --- Theme variants --- */
+.theme-light.theme-box {
+  --bg: #ffffff;
+  --text: #0f172a;   
+  --muted: #475569;  
+  --surface: #f8fafc;
+  --border: #e2e8f0; 
+  --brand: #2563eb;  
+  --brand-contrast: #ffffff;
+  --overlay: rgba(0,0,0,0.10);
+}
+
+.theme-dark.theme-box {
+  --bg: #0b1220;     
+  --text: #e5e7eb;   
+  --muted: #9ca3af;  
+  --surface: #111827;
+  --border: #1f2937; 
+  --brand: #60a5fa;  
+  --brand-contrast: #0b1220;
+  --overlay: rgba(0,0,0,0.25);
+}
+
+.theme-sepia.theme-box {
+  --bg: #f9f5ec;
+  --text: #3f2f1c;
+  --muted: #6b5330;
+  --surface: #f3e9d7;
+  --border: #e6d9c3;
+  --brand: #9c6b3f;
+  --brand-contrast: #fff8f0;
+  --overlay: rgba(63, 47, 28, 0.15);
+}
+
+
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 8px 14px 8px;
+}
+
+/* Base tile */
+.option-tile {
+  position: relative;
+  min-width: 96px;
+  height: 64px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: #f8fafc;
+  color: #0f172a; /* used for currentColor if needed */
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  text-align: center;
+  user-select: none;
+}
+
+/* Selected state: slightly bigger + accent border */
+.option-tile.selected {
+  transform: scale(1.04);
+  border-color: #3b82f6; /* accent. Change to match your design system */
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+}
+
+/* Keyboard focus */
+.option-tile:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+/* Label rendered over images/patterns for readability */
+.tile-label {
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  pointer-events: none;
+}
+
+/* Background tiles */
+.bg-tile {
+  overflow: hidden;
+}
+
+/* Pattern: none (plain) */
+.pattern-none {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+/* Pattern: grid (CSS-only) */
+.pattern-grid {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Pattern: dots (CSS-only) */
+.pattern-dots {
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(#d1d5db 1.2px, transparent 1.2px);
+  background-size: 10px 10px;
+  border: 1px solid #e5e7eb;
+}
+
+
+.font-tile {
+  min-width: 120px;
+  height: 56px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.font-tile.selected {
+  border-color: var(--card-border);
+}
+
+.panel-toggle{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card-bg) ;
+  color: var(--card-text);
+  cursor: pointer;
+  padding: 12px 8px;
+  font-size: 16px;
+}
+.panel-content {
+  padding: 12px;
+  background: var(--card-bg-hover);
+  color: var(--card-text);
+}
+
+/* ---------- Upload tile styles ---------- */
+.upload-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.upload-tile {
+  width: 180px;
+  height: 120px;
+  border-radius: 12px;
+  border: 2px dashed #ffffffbf; /* blue dashed border */
+  background: var(--card-bg-hover);
+  color: var(--card-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.upload-tile:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+}
+.upload-icon {
+  font-size: 18px;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.upload-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+/* ---------- Password form ---------- */
+.pwd-form {
+  display: grid;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-field span {
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.form-field input[type="password"] {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+.form-field input[type="password"]:focus {
+  border-color: var(--border);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 5px;
+  cursor: pointer;
+  min-width: 180px;
+  transition: transform 120ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.btn.primary {
+  background: var(--card-text-strong);
+  color: var(--card-bg);
+  margin-top: 8px;
+}
+.btn.primary:disabled {
+  background: var(--card-text-strong);
+  cursor: not-allowed;
+}
+.btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background-color: var(--card-text-strong);
+  box-shadow: 0 2px 10px var(--card-text);
+}
+
+.status-msg {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #fde68a; /* soft amber status */
+}
+
+
+
+  

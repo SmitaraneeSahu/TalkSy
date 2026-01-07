@@ -1,0 +1,40 @@
+.search-page{
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+.results-section{
+    flex: 3;
+}
+.search-sidebar{
+    flex: 1;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-self: flex-start;
+    height: fit-content;
+}
+.searchbox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: solid 1px var(--text);
+    border-radius: 15px;
+    padding: 10px 12px;
+}
+input:focus{
+    outline: none;
+    border: none;
+}
+.section-title{
+    margin: 20px 0 10px;
+    font-size: 18px;
+}
+.posts-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
