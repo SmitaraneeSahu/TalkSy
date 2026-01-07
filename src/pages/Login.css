@@ -40,15 +40,15 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  color: white;
+  color: var(--write-post-text);
 }
 
 .login-option span {
   flex: 1;
   text-align: center;
   padding: 0.8rem;
-  background: var(--card-bg);
-  color: white;
+  color: var(--write-post-text);
+  background-color: var(--write-post-bg);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -89,8 +89,8 @@
 
 button[type='submit'] {
   padding: 8px 10px;
-  background: var(--card-bg-hover);
-  color: #fff;
+  color: var(--write-post-text);
+  background-color: var(--write-post-bg);
   font-size: 1rem;
   font-weight: bold;
   border: solid 1px white;

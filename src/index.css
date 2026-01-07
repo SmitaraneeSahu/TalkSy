@@ -33,8 +33,8 @@
   --card-text: #0f1419;
 
   --write-post-bg: #f1f1f1de;
-  --write-post-text: black;
-  --write-post-bg-hover: #bebebece;
+  --write-post-text: rgb(40, 38, 38);
+  --write-post-bg-hover: #818181ce;
   --write-post-text-hover: white;
 
   --logo-bar: black;
