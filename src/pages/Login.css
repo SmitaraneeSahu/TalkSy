@@ -117,7 +117,7 @@ button[type='submit']:hover {
 }
 .link-button{
   cursor: pointer;
-  color: white;
+  color: var(--write-post-text);
 }
 /* Responsive */
 @media (max-width: 768px) {
